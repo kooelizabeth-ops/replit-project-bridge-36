@@ -1,21 +1,15 @@
 export interface EnquiryInput {
   name: string;
-  contact: string;
-  eventDate: string;
-  eventFormat: string;
+  phone: string;
+  comment: string;
 }
 
 export type EnquiryErrors = Partial<Record<keyof EnquiryInput, string>>;
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_PATTERN = /^\+?[\d\s()-]+$/;
 
-export function localTodayIso(): string {
-  const now = new Date();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  return `${now.getFullYear()}-${month}-${day}`;
-}
+export const NAME_MAX = 120;
+export const COMMENT_MAX = 2000;
 
 export function validateEnquiry(input: EnquiryInput): EnquiryErrors {
   const errors: EnquiryErrors = {};
@@ -23,27 +17,19 @@ export function validateEnquiry(input: EnquiryInput): EnquiryErrors {
   const name = input.name.trim();
   if (!name) {
     errors.name = 'Укажите имя.';
-  } else if (name.length > 120) {
-    errors.name = 'Имя не должно быть длиннее 120 символов.';
+  } else if (name.length > NAME_MAX) {
+    errors.name = `Имя не должно быть длиннее ${NAME_MAX} символов.`;
   }
 
-  const contact = input.contact.trim();
-  if (!contact) {
-    errors.contact = 'Укажите телефон или email.';
-  } else if (contact.includes('@')) {
-    if (!EMAIL_PATTERN.test(contact) || contact.length > 200) {
-      errors.contact = 'Проверьте адрес email.';
-    }
-  } else if (!PHONE_PATTERN.test(contact) || contact.replace(/\D/g, '').length < 7 || contact.length > 200) {
-    errors.contact = 'Проверьте номер телефона или укажите email.';
+  const phone = input.phone.trim();
+  if (!phone) {
+    errors.phone = 'Укажите телефон.';
+  } else if (!PHONE_PATTERN.test(phone) || phone.replace(/\D/g, '').length < 7 || phone.length > 40) {
+    errors.phone = 'Проверьте номер телефона.';
   }
 
-  if (input.eventDate && input.eventDate < localTodayIso()) {
-    errors.eventDate = 'Дата не может быть в прошлом.';
-  }
-
-  if (!input.eventFormat) {
-    errors.eventFormat = 'Выберите формат события.';
+  if (input.comment.trim().length > COMMENT_MAX) {
+    errors.comment = `Комментарий не должен быть длиннее ${COMMENT_MAX} символов.`;
   }
 
   return errors;

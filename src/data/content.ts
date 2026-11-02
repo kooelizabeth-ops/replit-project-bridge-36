@@ -4,15 +4,15 @@ export const SITE = {
   name: 'АРКА 123',
   brandLine: 'Встречаемся напротив Библиотеки.',
   address: 'Мстиславца, 10, Минск',
+  locationMarker: 'Минск · Мстиславца, 10',
   area: '123 м²',
   logoSrc: logo.url,
 } as const;
 
 export const NAV_ITEMS = [
   { label: 'Пространство', href: '#space' },
-  { label: 'Архитектура', href: '#architecture' },
-  { label: 'Галерея', href: '#gallery' },
   { label: 'Форматы', href: '#formats' },
+  { label: 'О нас', href: '#about' },
   { label: 'Контакты', href: '#contacts' },
 ] as const;
 
@@ -25,4 +25,9 @@ export const EVENT_FORMATS = [
   { id: 'private', title: 'Частные и бренд-события' },
 ] as const;
 
-export const EVENT_FORMAT_TITLES = EVENT_FORMATS.map((format) => format.title);
+export const SPACE_FACTS = [
+  { label: 'Площадь', value: '123 м²' },
+  { label: 'Адрес', value: 'Минск, Мстиславца, 10' },
+  { label: 'Свет', value: 'Естественный свет и выразительная архитектура' },
+  { label: 'Форматы', value: 'Камерные и корпоративные события' },
+] as const;

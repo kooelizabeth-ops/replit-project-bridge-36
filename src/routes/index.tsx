@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 import SiteHeader from '@/components/SiteHeader';
-import AboutSection from '@/sections/AboutSection';
 import ArchitectureSection from '@/sections/ArchitectureSection';
 import BookingSection from '@/sections/BookingSection';
 import FormatsSection from '@/sections/FormatsSection';
-import GallerySection from '@/sections/GallerySection';
 import HeroSection from '@/sections/HeroSection';
 import SiteFooter from '@/sections/SiteFooter';
+import SpaceSection from '@/sections/SpaceSection';
+import StatementSection from '@/sections/StatementSection';
 
 const TITLE = 'АРКА 123 — пространство для встреч и событий в Минске';
 const DESCRIPTION =
@@ -31,17 +31,17 @@ function Index() {
     <>
       <a
         href="#booking"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-stone-100 focus:px-4 focus:py-3 focus:text-sm focus:font-medium focus:text-ink-900"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-paper focus:px-4 focus:py-3 focus:text-sm focus:text-ink"
       >
         Перейти к бронированию
       </a>
       <SiteHeader />
       <main>
         <HeroSection />
-        <AboutSection />
-        <ArchitectureSection />
-        <GallerySection />
+        <StatementSection />
+        <SpaceSection />
         <FormatsSection />
+        <ArchitectureSection />
         <BookingSection />
       </main>
       <SiteFooter />

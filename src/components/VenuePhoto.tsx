@@ -1,4 +1,5 @@
 import type { PhotoAspect, VenuePhoto as VenuePhotoData } from '@/data/photos';
+import useReveal from '@/hooks/useReveal';
 
 const ASPECT_RATIO: Record<PhotoAspect, string> = {
   landscape: '3 / 2',
@@ -11,21 +12,25 @@ interface VenuePhotoProps {
   photo: VenuePhotoData;
   sizes: string;
   className?: string;
+  aspect?: PhotoAspect;
+  eager?: boolean;
 }
 
-export default function VenuePhoto({ photo, sizes, className = '' }: VenuePhotoProps) {
+export default function VenuePhoto({ photo, sizes, className = '', aspect, eager = false }: VenuePhotoProps) {
+  const ref = useReveal<HTMLDivElement>();
   return (
     <div
-      style={{ aspectRatio: ASPECT_RATIO[photo.aspect] }}
-      className={`relative w-full overflow-hidden bg-slate-900 ${className}`}
+      ref={ref}
+      style={{ aspectRatio: ASPECT_RATIO[aspect ?? photo.aspect] }}
+      className={`reveal relative w-full overflow-hidden bg-rule ${className}`}
     >
       <img
         src={photo.src}
         alt={photo.alt}
         sizes={sizes}
-        loading="lazy"
+        loading={eager ? 'eager' : 'lazy'}
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover saturate-[0.92] contrast-[1.03]"
+        className="absolute inset-0 h-full w-full object-cover"
         style={{ objectPosition: photo.objectPosition ?? 'center' }}
       />
     </div>
