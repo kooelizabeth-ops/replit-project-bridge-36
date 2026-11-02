@@ -5,26 +5,34 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * АРКА 123 design system — ultra-modern high editorial / warm architectural.
- * Brand accent #203642 is non-negotiable and kept as the exact hex value.
- * Utilities: bg-ivory, text-ink, border-rule, text-brand, font-mono, etc.
+ * АРКА 123 design system: deep graphite + warm ivory, restrained accents.
+ * Brand palette (ink / slate / stone / signal / moss) is registered as
+ * Tailwind colors; shadcn semantic tokens map onto it.
  */
 
 @theme inline {
   --font-sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  --tracking-eyebrow: 0.24em;
 
-  --color-brand: var(--brand);
-  --color-ivory: var(--ivory);
-  --color-paper: var(--paper);
-  --color-ink: var(--ink);
-  --color-graphite: var(--graphite);
-  --color-graphite-deep: var(--graphite-deep);
-  --color-ash: var(--ash);
-  --color-mist: var(--mist);
-  --color-rule: var(--rule);
-  --color-rule-dark: var(--rule-dark);
-  --color-error: var(--error);
+  --color-ink-950: oklch(0.174 0.008 229.4);
+  --color-ink-900: oklch(0.206 0.009 240.3);
+  --color-ink-800: oklch(0.248 0.012 237.2);
+  --color-ink-700: oklch(0.312 0.014 235.4);
+  --color-slate-900: oklch(0.27 0.026 242);
+  --color-slate-800: oklch(0.312 0.031 239.8);
+  --color-slate-700: oklch(0.371 0.036 238.2);
+  --color-stone-50: oklch(0.98 0.006 84.6);
+  --color-stone-100: oklch(0.953 0.01 81.8);
+  --color-stone-200: oklch(0.911 0.016 82.8);
+  --color-stone-300: oklch(0.857 0.019 83.1);
+  --color-stone-400: oklch(0.766 0.019 81.3);
+  --color-stone-500: oklch(0.629 0.016 80.7);
+  --color-stone-600: oklch(0.512 0.015 82.4);
+  --color-stone-700: oklch(0.425 0.012 81.8);
+  --color-signal-light: oklch(0.756 0.094 34.1);
+  --color-signal-dark: oklch(0.494 0.131 32.2);
+  --color-moss-light: oklch(0.795 0.039 156.2);
+  --color-moss-dark: oklch(0.461 0.048 162);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -52,39 +60,26 @@
 }
 
 :root {
-  /* Exact brand accent — do not convert or shift. */
-  --brand: #203642;
-  --ivory: oklch(0.9528 0.0086 84.57); /* #F2EFE9 */
-  --paper: oklch(0.982 0.0041 91.45); /* #FAF9F6 */
-  --ink: oklch(0.2404 0.0064 78.2); /* #211F1C */
-  --graphite: oklch(0.2571 0.007 229.13); /* #202426 */
-  --graphite-deep: oklch(0.2241 0.006 236.83);
-  --ash: oklch(0.5572 0.0104 78.24); /* #77736D */
-  --mist: oklch(0.7556 0.0139 82.4); /* secondary text on dark */
-  --rule: oklch(0.8739 0.0117 84.58); /* #D9D5CD */
-  --rule-dark: oklch(0.402 0.0055 214.36); /* #45494A */
-  --error: oklch(0.454 0.1129 32.4);
-
   --radius: 0rem;
-  --background: var(--ivory);
-  --foreground: var(--ink);
-  --card: var(--paper);
-  --card-foreground: var(--ink);
-  --popover: var(--paper);
-  --popover-foreground: var(--ink);
-  --primary: var(--brand);
-  --primary-foreground: var(--paper);
-  --secondary: var(--paper);
-  --secondary-foreground: var(--ink);
-  --muted: var(--paper);
-  --muted-foreground: var(--ash);
-  --accent: var(--brand);
-  --accent-foreground: var(--paper);
-  --destructive: var(--error);
-  --destructive-foreground: var(--paper);
-  --border: var(--rule);
-  --input: var(--rule);
-  --ring: var(--brand);
+  --background: oklch(0.206 0.009 240.3);
+  --foreground: oklch(0.953 0.01 81.8);
+  --card: oklch(0.248 0.012 237.2);
+  --card-foreground: oklch(0.953 0.01 81.8);
+  --popover: oklch(0.248 0.012 237.2);
+  --popover-foreground: oklch(0.953 0.01 81.8);
+  --primary: oklch(0.953 0.01 81.8);
+  --primary-foreground: oklch(0.206 0.009 240.3);
+  --secondary: oklch(0.312 0.014 235.4);
+  --secondary-foreground: oklch(0.953 0.01 81.8);
+  --muted: oklch(0.312 0.014 235.4);
+  --muted-foreground: oklch(0.766 0.019 81.3);
+  --accent: oklch(0.312 0.031 239.8);
+  --accent-foreground: oklch(0.953 0.01 81.8);
+  --destructive: oklch(0.494 0.131 32.2);
+  --destructive-foreground: oklch(0.98 0.006 84.6);
+  --border: oklch(0.312 0.014 235.4);
+  --input: oklch(0.312 0.014 235.4);
+  --ring: oklch(0.953 0.01 81.8);
 }
 
 @layer base {
@@ -94,127 +89,39 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 96px;
   }
 
   body {
-    background-color: var(--color-ivory);
-    color: var(--color-ink);
+    background-color: var(--color-ink-900);
+    color: var(--color-stone-100);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    overflow-x: clip;
   }
 
   ::selection {
-    background-color: var(--color-brand);
-    color: var(--color-paper);
+    background-color: var(--color-stone-100);
+    color: var(--color-ink-900);
   }
 
   :focus-visible {
-    outline: 1px solid currentColor;
+    outline: 2px solid var(--color-stone-100);
     outline-offset: 4px;
   }
-
-  h1,
-  h2,
-  h3 {
-    text-wrap: balance;
-  }
 }
 
-/* Small editorial label: monospaced, uppercase, tracked. */
-@utility label-mono {
-  font-family: var(--font-mono);
+@utility eyebrow {
   font-size: 11px;
-  line-height: 1.4;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  @media (min-width: 1024px) {
-    font-size: 12px;
-  }
-}
-
-/* Outer page margins: 20 / 32 / 56 px. */
-@utility shell {
-  width: 100%;
-  max-width: 1600px;
-  margin-inline: auto;
-  padding-inline: 20px;
-  @media (min-width: 768px) {
-    padding-inline: 32px;
-  }
-  @media (min-width: 1280px) {
-    padding-inline: 56px;
-  }
-}
-
-@utility section-y {
-  padding-block: 96px;
-  @media (min-width: 1024px) {
-    padding-block: 160px;
-  }
-}
-
-@utility display-hero {
-  font-size: clamp(42px, 6vw, 88px);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
-  font-weight: 400;
-}
-
-@utility display-section {
-  font-size: clamp(32px, 4.2vw, 60px);
-  line-height: 1.06;
-  letter-spacing: -0.025em;
-  font-weight: 400;
-}
-
-@utility display-sub {
-  font-size: clamp(24px, 2.5vw, 36px);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
-  font-weight: 400;
-}
-
-/* Quiet image reveal, disabled under reduced motion. */
-@utility reveal {
-  opacity: 0;
-  transform: translate3d(0, 12px, 0);
-  transition:
-    opacity 900ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
-  &[data-visible="true"] {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes hero-in {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 10px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@utility hero-in {
-  animation: hero-in 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  letter-spacing: var(--tracking-eyebrow);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
   }
 
   *,

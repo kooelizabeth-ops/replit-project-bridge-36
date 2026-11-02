@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 import BrandLogo from '@/components/BrandLogo';
 import { BOOKING_HREF, NAV_ITEMS } from '@/data/content';
 import useScrolled from '@/hooks/useScrolled';
 
 export default function SiteHeader() {
-  const scrolled = useScrolled(40);
+  const scrolled = useScrolled(24);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!menuOpen) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setMenuOpen(false);
     };
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', handleKeyDown);
@@ -27,36 +29,36 @@ export default function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 text-paper transition-colors duration-500 ${
-        solid ? 'border-b border-rule-dark bg-graphite/95 backdrop-blur-sm' : 'border-b border-transparent bg-transparent'
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        solid ? 'border-b border-ink-700 bg-ink-900/95 backdrop-blur-sm' : 'border-b border-transparent bg-transparent'
       }`}
     >
-      <div className="shell flex h-16 items-center justify-between gap-6 lg:h-20">
+      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-4 px-6 lg:h-24 lg:px-12">
         <a href="#top" onClick={closeMenu} aria-label="АРКА 123, в начало страницы" className="shrink-0">
-          <BrandLogo width={120} className="lg:hidden" />
-          <BrandLogo width={150} className="hidden lg:block" />
+          <BrandLogo width={132} className="lg:hidden" />
+          <BrandLogo width={200} className="hidden lg:block" />
         </a>
 
-        <nav aria-label="Основная навигация" className="hidden items-center gap-10 lg:flex">
+        <nav aria-label="Основная навигация" className="hidden items-center gap-6 xl:gap-10 lg:flex">
           {NAV_ITEMS.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-[13px] tracking-[0.02em] text-paper/85 underline-offset-[6px] transition-colors duration-300 hover:text-paper hover:underline"
+              className="text-sm font-medium text-stone-200 transition-colors duration-200 hover:text-stone-100 hover:underline hover:underline-offset-8"
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <a
             href={BOOKING_HREF}
             onClick={closeMenu}
-            className="group inline-flex h-9 items-center gap-2 border border-paper/60 px-4 text-[12px] tracking-[0.02em] text-paper transition-colors duration-300 hover:border-paper hover:bg-paper hover:text-ink lg:h-10 lg:px-5 lg:text-[13px]"
+            className="group inline-flex h-10 items-center gap-2 border border-stone-100/80 px-4 text-xs font-medium text-stone-100 transition-colors duration-200 hover:border-stone-100 hover:bg-stone-100 hover:text-ink-900 active:bg-stone-200 lg:h-11 lg:px-5 lg:text-sm"
           >
             Забронировать
-            <ArrowUpRight size={14} strokeWidth={1.5} aria-hidden className="hidden transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:block" />
+            <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden className="hidden transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 lg:block" />
           </a>
           <button
             type="button"
@@ -64,9 +66,9 @@ export default function SiteHeader() {
             aria-controls="mobile-menu"
             aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
             onClick={() => setMenuOpen((open) => !open)}
-            className="inline-flex h-10 w-10 items-center justify-center text-paper lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center text-stone-100 transition-colors duration-200 hover:text-stone-300 lg:hidden"
           >
-            {menuOpen ? <X size={20} strokeWidth={1.25} aria-hidden /> : <Menu size={20} strokeWidth={1.25} aria-hidden />}
+            {menuOpen ? <X size={22} strokeWidth={1.5} aria-hidden /> : <Menu size={22} strokeWidth={1.5} aria-hidden />}
           </button>
         </div>
       </div>
@@ -75,32 +77,32 @@ export default function SiteHeader() {
         <nav
           id="mobile-menu"
           aria-label="Мобильное меню"
-          className="fixed inset-x-0 bottom-0 top-16 flex flex-col justify-between bg-graphite px-5 pb-10 pt-6 md:px-8 lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-20 flex flex-col justify-between bg-ink-900 px-6 pb-10 pt-8 lg:hidden"
         >
           <ul className="flex flex-col">
             {NAV_ITEMS.map((item, index) => (
-              <li key={item.href} className="border-t border-rule-dark last:border-b">
+              <li key={item.href} className="border-t border-ink-700 last:border-b">
                 <a
                   href={item.href}
                   onClick={closeMenu}
-                  className="flex items-baseline gap-5 py-5 text-paper transition-colors duration-300 hover:text-mist"
+                  className="group flex items-center justify-between py-5 font-medium text-stone-100 transition-colors duration-200 hover:text-stone-300"
                 >
-                  <span className="label-mono text-mist">0{index + 1}</span>
-                  <span className="text-[28px] leading-none tracking-[-0.015em]">{item.label}</span>
+                  <span className="flex items-baseline gap-4">
+                    <span className="text-xs tabular-nums text-stone-500">0{index + 1}</span>
+                    <span className="text-2xl">{item.label}</span>
+                  </span>
+                  <ArrowRight size={18} strokeWidth={1.5} aria-hidden className="transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
               </li>
             ))}
           </ul>
-          <div className="flex flex-col gap-6">
-            <p className="label-mono text-mist">Минск · Мстиславца, 10</p>
-            <a
-              href={BOOKING_HREF}
-              onClick={closeMenu}
-              className="inline-flex h-14 items-center justify-center bg-paper text-[15px] text-ink transition-colors duration-300 hover:bg-ivory"
-            >
-              Забронировать пространство
-            </a>
-          </div>
+          <a
+            href={BOOKING_HREF}
+            onClick={closeMenu}
+            className="inline-flex h-14 items-center justify-center bg-stone-100 text-base font-medium text-ink-900 transition-colors duration-200 hover:bg-stone-200"
+          >
+            Забронировать
+          </a>
         </nav>
       )}
     </header>

@@ -1,14 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { validateEnquiry, type EnquiryInput } from '@/lib/enquiryValidation';
+import { localTodayIso, validateEnquiry, type EnquiryInput } from '@/lib/enquiryValidation';
 
 const valid: EnquiryInput = {
   name: 'Анна',
-  phone: '+375 (29) 123-45-67',
-  comment: '',
+  contact: 'anna@example.com',
+  eventDate: '',
+  eventFormat: 'Лекции и презентации',
 };
 
 describe('validateEnquiry', () => {
-  it('accepts name and phone with an empty comment', () => {
+  it('accepts a complete enquiry', () => {
     expect(validateEnquiry(valid)).toEqual({});
   });
 
@@ -18,15 +19,19 @@ describe('validateEnquiry', () => {
     expect(validateEnquiry({ ...valid, name: 'a'.repeat(120) }).name).toBeUndefined();
   });
 
-  it('requires a phone with at least 7 digits', () => {
-    expect(validateEnquiry({ ...valid, phone: '' }).phone).toBeDefined();
-    expect(validateEnquiry({ ...valid, phone: '+375 29' }).phone).toBeDefined();
-    expect(validateEnquiry({ ...valid, phone: 'anna@example.com' }).phone).toBeDefined();
-    expect(validateEnquiry({ ...valid, phone: '1234567' }).phone).toBeUndefined();
+  it('requires a phone with at least 7 digits or a valid email', () => {
+    expect(validateEnquiry({ ...valid, contact: '' }).contact).toBeDefined();
+    expect(validateEnquiry({ ...valid, contact: 'anna@x' }).contact).toBeDefined();
+    expect(validateEnquiry({ ...valid, contact: '+375 29' }).contact).toBeDefined();
+    expect(validateEnquiry({ ...valid, contact: '+375 (29) 123-45-67' }).contact).toBeUndefined();
   });
 
-  it('keeps the comment optional, up to 2000 characters', () => {
-    expect(validateEnquiry({ ...valid, comment: 'a'.repeat(2000) }).comment).toBeUndefined();
-    expect(validateEnquiry({ ...valid, comment: 'a'.repeat(2001) }).comment).toBeDefined();
+  it('rejects event dates in the past', () => {
+    expect(validateEnquiry({ ...valid, eventDate: '2000-01-01' }).eventDate).toBeDefined();
+    expect(validateEnquiry({ ...valid, eventDate: localTodayIso() }).eventDate).toBeUndefined();
+  });
+
+  it('requires an event format', () => {
+    expect(validateEnquiry({ ...valid, eventFormat: '' }).eventFormat).toBeDefined();
   });
 });
