@@ -15,22 +15,24 @@
   --tracking-eyebrow: 0.24em;
 
   --color-ink-950: oklch(0.174 0.008 229.4);
-  --color-ink-900: oklch(0.206 0.009 240.3);
+  --color-ink-900: #202426;
   --color-ink-800: oklch(0.248 0.012 237.2);
-  --color-ink-700: oklch(0.312 0.014 235.4);
+  --color-ink-700: #45494a;
   --color-slate-900: oklch(0.27 0.026 242);
   --color-slate-800: oklch(0.312 0.031 239.8);
   --color-slate-700: oklch(0.371 0.036 238.2);
-  --color-stone-50: oklch(0.98 0.006 84.6);
-  --color-stone-100: oklch(0.953 0.01 81.8);
+  --color-stone-50: #faf9f6;
+  --color-stone-100: #f2efe9;
   --color-stone-200: oklch(0.911 0.016 82.8);
-  --color-stone-300: oklch(0.857 0.019 83.1);
+  --color-stone-300: #d9d5cd;
   --color-stone-400: oklch(0.766 0.019 81.3);
   --color-stone-500: oklch(0.629 0.016 80.7);
-  --color-stone-600: oklch(0.512 0.015 82.4);
+  --color-stone-600: #77736d;
   --color-stone-700: oklch(0.425 0.012 81.8);
   --color-signal-light: oklch(0.756 0.094 34.1);
   --color-signal-dark: oklch(0.494 0.131 32.2);
+  --color-brand: #203642;
+  --color-charcoal: #211f1c;
   --color-moss-light: oklch(0.795 0.039 156.2);
   --color-moss-dark: oklch(0.461 0.048 162);
 
@@ -131,4 +133,52 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+@utility nav-link {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 240ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+@utility logo-hover {
+  transition: opacity 280ms ease;
+  &:hover,
+  &:focus-visible {
+    opacity: 0.72;
+  }
+}
+
+@keyframes preloader-letter {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes preloader-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@utility preloader-letter {
+  opacity: 0;
+  animation: preloader-letter 420ms cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+@utility preloader-line {
+  transform-origin: left;
+  animation: preloader-line 1100ms cubic-bezier(0.2, 0, 0, 1) forwards;
 }
