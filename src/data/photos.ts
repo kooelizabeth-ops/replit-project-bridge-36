@@ -1,12 +1,12 @@
 import photo0 from '@/assets/images-web-0.jpg.asset.json';
+import photo3 from '@/assets/images-web-3.jpg.asset.json';
 import photo04 from '@/assets/images-web-04.jpg.asset.json';
-import photo05 from '@/assets/images-web-05.jpg.asset.json';
-import photo06 from '@/assets/images-web-06.jpg.asset.json';
+import photo07 from '@/assets/images-web-07.jpg.asset.json';
 import photo08 from '@/assets/images-web-08.jpg.asset.json';
 import photo09 from '@/assets/images-web-09.jpg.asset.json';
 import heroVideo from '@/assets/videos-final-compressed.mp4.asset.json';
 
-// Only approved, real venue photography. No generated or altered imagery.
+// Only approved, real venue photography. Crops must keep both arched windows intact.
 export type PhotoAspect = 'landscape' | 'portrait' | 'square' | 'wide';
 
 export interface VenuePhoto {
@@ -17,13 +17,12 @@ export interface VenuePhoto {
 }
 
 export const HERO_VIDEO_SRC = heroVideo.url;
-export const HERO_POSTER_SRC = photo05.url;
+export const HERO_POSTER_SRC = photo08.url;
 
 export const SPACE_PHOTO: VenuePhoto = {
-  src: photo09.url,
-  alt: 'Зал АРКА 123: два арочных окна на задней стене, тёмный потолок с линейным светом и дубовый пол ёлочкой',
-  aspect: 'portrait',
-  objectPosition: '58% 50%',
+  src: photo3.url,
+  alt: 'Два больших арочных окна на задней стене АРКА 123 с видом на Национальную библиотеку',
+  aspect: 'landscape',
 };
 
 export const LOCATION_PHOTO: VenuePhoto = {
@@ -33,29 +32,23 @@ export const LOCATION_PHOTO: VenuePhoto = {
 };
 
 export const ARCHITECTURE_MAIN: VenuePhoto & { caption: string } = {
-  src: photo05.url,
-  alt: 'Общий вид зала АРКА 123 с колонной, линейным светом и стойкой ресепшн',
-  aspect: 'landscape',
-  caption: 'Общий вид зала',
+  src: photo09.url,
+  alt: 'Зал АРКА 123: арочные окна задней стены, тёмный потолок с линейным светом, дубовый пол ёлочкой',
+  aspect: 'wide',
+  caption: 'Задняя стена и арочные окна',
 };
 
-export const ARCHITECTURE_DETAILS: ReadonlyArray<VenuePhoto & { caption: string }> = [
-  {
-    src: photo08.url,
-    alt: 'Два арочных окна на задней стене пространства АРКА 123',
-    aspect: 'portrait',
-    caption: 'Арочные окна задней стены',
-  },
-  {
-    src: photo04.url,
-    alt: 'Интерьер АРКА 123 с линейным светом под потолком',
-    aspect: 'portrait',
-    caption: 'Линейный свет и фактура потолка',
-  },
-];
-
-export const DETAIL_PHOTO: VenuePhoto = {
-  src: photo06.url,
-  alt: 'Стеклянная перегородка и дубовый пол ёлочкой в АРКА 123',
+export const ARCHITECTURE_PORTRAIT: VenuePhoto & { caption: string } = {
+  src: photo07.url,
+  alt: 'Кремовая стена, стеклянная перегородка и дубовый пол ёлочкой в АРКА 123',
   aspect: 'portrait',
+  objectPosition: '50% 60%',
+  caption: 'Фактура стен и пола',
+};
+
+export const ARCHITECTURE_LANDSCAPE: VenuePhoto & { caption: string } = {
+  src: photo04.url,
+  alt: 'Колонны и линейный свет под тёмным потолком АРКА 123',
+  aspect: 'wide',
+  caption: 'Линейный свет и колонны',
 };
