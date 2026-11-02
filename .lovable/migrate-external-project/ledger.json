@@ -1,0 +1,16 @@
+{
+  "source": "bolt (user labelled Replit; archive contains .bolt metadata and Supabase migrations)",
+  "capabilities": [
+    {"capability": "code", "source": "Vite + React 18 single-page site (hero video scrub, about, architecture, gallery, formats, booking, footer)", "outcome": "migrate to TanStack Start index route", "status": "in_progress", "next_action": "port components"},
+    {"capability": "assets", "source": "public/assets images + hero video", "outcome": "migrate via Lovable Assets", "status": "in_progress", "next_action": "upload"},
+    {"capability": "schema", "source": "supabase/migrations enquiries table, anon INSERT-only RLS", "outcome": "migrate to Lovable Cloud", "status": "in_progress", "next_action": "create migration"},
+    {"capability": "records", "source": "enquiries rows in old Bolt database", "outcome": "migrate", "status": "pending", "next_action": "request CSV export of enquiries after preview"},
+    {"capability": "auth identities", "source": "none — no auth used in code", "outcome": "not applicable", "status": "verified", "next_action": "none"},
+    {"capability": "authorization", "source": "RLS: public insert only, no reads", "outcome": "migrate", "status": "in_progress", "next_action": "recreate policy"},
+    {"capability": "storage bytes", "source": "none", "outcome": "not applicable", "status": "verified", "next_action": "none"},
+    {"capability": "external providers / webhooks / schedules / edge functions", "source": "none", "outcome": "not applicable", "status": "verified", "next_action": "none"},
+    {"capability": "secrets", "source": "VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY (old database)", "outcome": "replaced by Lovable Cloud config", "status": "verified", "next_action": "none"},
+    {"capability": "cutover", "source": "old Bolt site", "outcome": "publish Lovable site and repoint domain if any", "status": "pending", "next_action": "user publishes"},
+    {"capability": "verification", "source": "", "outcome": "build, render, form submit lands in Cloud", "status": "pending", "next_action": "verify after build"}
+  ]
+}
