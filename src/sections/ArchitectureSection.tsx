@@ -1,31 +1,42 @@
 import VenuePhoto from '@/components/VenuePhoto';
-import { ARCHITECTURE_PHOTOS } from '@/data/photos';
+import { ARCHITECTURE_LANDSCAPE, ARCHITECTURE_MAIN, ARCHITECTURE_PORTRAIT } from '@/data/photos';
+
+function Caption({ index, text }: { index: string; text: string }) {
+  return (
+    <figcaption className="mt-4 flex items-baseline gap-4 border-t border-rule-dark pt-4 text-[13px] text-mist">
+      <span className="label-mono">{index}</span>
+      <span>{text}</span>
+    </figcaption>
+  );
+}
 
 export default function ArchitectureSection() {
   return (
-    <section id="architecture" aria-labelledby="architecture-title" className="bg-ink-900 py-28 text-stone-100 lg:py-40">
-      <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-        <div className="max-w-[720px]">
-          <p className="eyebrow text-stone-400">Архитектура</p>
-          <h2 id="architecture-title" className="mt-6 text-[clamp(30px,3.6vw,48px)] font-medium leading-[1.2] tracking-[-0.015em]">
+    <section id="architecture" aria-labelledby="architecture-title" className="section-y bg-graphite-deep text-paper">
+      <div className="shell">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-x-10">
+          <p className="label-mono text-mist lg:col-span-2">04 — Архитектура</p>
+          <h2 id="architecture-title" className="display-section max-w-[14ch] lg:col-span-6">
             Архитектура задаёт настроение.
           </h2>
-          <p className="mt-8 text-base leading-[1.5] text-stone-300 lg:text-lg">
-            Арочные окна, выразительная геометрия и естественный свет формируют характер пространства. Здесь архитектура
-            становится частью каждого события.
+          <p className="text-[16px] leading-[1.6] text-mist lg:col-span-3 lg:col-start-10 lg:self-end lg:text-[17px]">
+            Свет, пространство и внимание к деталям создают атмосферу для продуктивной работы и вдохновляющих событий.
           </p>
         </div>
 
-        <div className="mt-20 grid gap-16 lg:mt-28 lg:grid-cols-12 lg:gap-x-12 lg:gap-y-24">
-          {ARCHITECTURE_PHOTOS.map((item, index) => (
-            <figure key={item.src} className={`flex flex-col gap-5 ${item.className}`}>
-              <VenuePhoto photo={item} sizes="(min-width: 1024px) 66vw, 100vw" />
-              <figcaption className="flex items-baseline gap-4 border-t border-ink-700 pt-4 text-sm text-stone-300">
-                <span className="tabular-nums text-stone-500">0{index + 1}</span>
-                <span>{item.caption}</span>
-              </figcaption>
-            </figure>
-          ))}
+        <div className="mt-16 grid gap-12 md:grid-cols-12 md:gap-x-6 lg:mt-24 lg:gap-x-10 lg:gap-y-20">
+          <figure className="md:col-span-12 lg:col-span-8">
+            <VenuePhoto photo={ARCHITECTURE_MAIN} sizes="(min-width: 1024px) 66vw, 100vw" />
+            <Caption index="A" text={ARCHITECTURE_MAIN.caption} />
+          </figure>
+          <figure className="md:col-span-5 lg:col-span-4 lg:mt-40">
+            <VenuePhoto photo={ARCHITECTURE_PORTRAIT} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 42vw, 100vw" />
+            <Caption index="B" text={ARCHITECTURE_PORTRAIT.caption} />
+          </figure>
+          <figure className="md:col-span-7 lg:col-span-6 lg:col-start-3">
+            <VenuePhoto photo={ARCHITECTURE_LANDSCAPE} sizes="(min-width: 1024px) 50vw, (min-width: 768px) 58vw, 100vw" />
+            <Caption index="C" text={ARCHITECTURE_LANDSCAPE.caption} />
+          </figure>
         </div>
       </div>
     </section>
