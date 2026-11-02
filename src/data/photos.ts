@@ -22,7 +22,7 @@ export const HERO_POSTER_SRC = photo08.url;
 export const SPACE_PHOTO: VenuePhoto = {
   src: photo3.url,
   alt: 'Два больших арочных окна на задней стене АРКА 123 с видом на Национальную библиотеку',
-  aspect: 'landscape',
+  aspect: 'wide',
 };
 
 export const LOCATION_PHOTO: VenuePhoto = {
