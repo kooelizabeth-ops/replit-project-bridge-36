@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PRELOADER_PATHS } from '@/data/preloaderLogo';
+import BrandMark from '@/components/BrandMark';
 
 const MIN_VISIBLE_MS = 700;
 const MAX_VISIBLE_MS = 2800;
@@ -40,29 +40,23 @@ export default function SitePreloader() {
 
   if (phase === 'gone') return null;
 
+  // Logo box mirrors the hero's centred logo (same width, centre and offset),
+  // so fading this layer reveals the identical logo underneath without a jump.
   return (
     <div
       role="status"
       aria-label="АРКА 123"
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-stone-100 transition-opacity ease-out ${
+      className={`fixed inset-0 z-[100] bg-ink-900 transition-opacity ease-out ${
         phase === 'fading' ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
       style={{ transitionDuration: `${FADE_MS}ms` }}
     >
-      <div className="flex w-[min(72vw,420px)] flex-col gap-6">
-        <svg viewBox="0 0 1897 632" aria-hidden focusable="false" className="h-auto w-full fill-brand">
-          {PRELOADER_PATHS.map((d, i) => (
-            <path
-              key={i}
-              d={d}
-              fillRule="evenodd"
-              className="preloader-letter motion-reduce:animate-none motion-reduce:opacity-100"
-              style={{ animationDelay: `${i * 90}ms` }}
-            />
-          ))}
-        </svg>
-        <div className="mx-[6%] h-px bg-stone-300">
-          <div className="preloader-line h-px bg-brand motion-reduce:animate-none" />
+      <div className="absolute inset-x-0 top-0 flex h-[100svh] items-center justify-center">
+        <div className="relative w-[70vw] -translate-y-[2.5svh] md:w-[380px] lg:w-[440px]">
+          <BrandMark animated className="w-full fill-on-media" />
+          <div className="absolute inset-x-[6%] top-[calc(100%+24px)] h-px bg-on-media/20">
+            <div className="preloader-line h-px bg-on-media/75 motion-reduce:animate-none" />
+          </div>
         </div>
       </div>
     </div>
