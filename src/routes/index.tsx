@@ -7,6 +7,7 @@ import BookingSection from '@/sections/BookingSection';
 import FormatsSection from '@/sections/FormatsSection';
 import GallerySection from '@/sections/GallerySection';
 import HeroSection from '@/sections/HeroSection';
+import ScenariosSection from '@/sections/ScenariosSection';
 import SiteFooter from '@/sections/SiteFooter';
 
 const TITLE = 'АРКА 123 — пространство для встреч и событий в Минске';
@@ -43,6 +44,7 @@ function Index() {
         <AboutSection />
         <ArchitectureSection />
         <GallerySection />
+        <ScenariosSection />
         <FormatsSection />
         <BookingSection />
       </main>
