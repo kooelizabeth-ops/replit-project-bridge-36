@@ -11,6 +11,8 @@ interface HeroVideoScrubRefs {
   videoRef: RefObject<HTMLVideoElement | null>;
   chapterRefs: ChapterRefs;
   progressRef: RefObject<HTMLDivElement | null>;
+  /** Centred brand logo shown before the opening text (brand reveal). */
+  logoRef?: RefObject<HTMLElement | null>;
 }
 
 const SEEK_TOLERANCE_SECONDS = 0.03;
@@ -23,6 +25,13 @@ function ramp(value: number, start: number, end: number): number {
   return Math.min(Math.max((value - start) / (end - start), 0), 1);
 }
 
+// Brand reveal inside the opening chapter (progress units of the existing scene):
+// the centred logo fades out first, then the opening items appear one by one.
+const LOGO_FADE = [0.005, 0.06] as const;
+const REVEAL_STARTS = [0.065, 0.085, 0.105, 0.125] as const;
+const REVEAL_LENGTH = 0.045;
+const REVEAL_SHIFT_PX = 12;
+
 function chapterOpacities(progress: number): [number, number, number] {
   const [first, second] = CHAPTER_BOUNDARIES;
   const half = CROSSFADE_WIDTH / 2;
@@ -31,7 +40,13 @@ function chapterOpacities(progress: number): [number, number, number] {
   return [1 - toSecond, toSecond * (1 - toThird), toThird];
 }
 
-export default function useHeroVideoScrub({ sectionRef, videoRef, chapterRefs, progressRef }: HeroVideoScrubRefs) {
+export default function useHeroVideoScrub({
+  sectionRef,
+  videoRef,
+  chapterRefs,
+  progressRef,
+  logoRef,
+}: HeroVideoScrubRefs) {
   useEffect(() => {
     const section = sectionRef.current;
     const video = videoRef.current;
@@ -55,6 +70,19 @@ export default function useHeroVideoScrub({ sectionRef, videoRef, chapterRefs, p
         chapter.style.opacity = String(opacity);
         chapter.style.transform = `translate3d(0, ${(1 - opacity) * CHAPTER_SHIFT_PX}px, 0)`;
         chapter.style.visibility = opacity < HIDDEN_OPACITY ? 'hidden' : 'visible';
+      });
+
+      // Brand reveal: only while the centred logo is rendered (not with reduced motion).
+      const logo = logoRef?.current ?? null;
+      const revealItems = chapters[0]?.querySelectorAll<HTMLElement>('[data-reveal]') ?? [];
+      if (logo) logo.style.opacity = String(1 - ramp(progress, LOGO_FADE[0], LOGO_FADE[1]));
+      revealItems.forEach((item) => {
+        const index = Number(item.dataset.reveal) || 0;
+        const start = REVEAL_STARTS[Math.min(index, REVEAL_STARTS.length - 1)];
+        const opacity = logo ? ramp(progress, start, start + REVEAL_LENGTH) : 1;
+        item.style.opacity = String(opacity);
+        item.style.transform = `translate3d(0, ${(1 - opacity) * REVEAL_SHIFT_PX}px, 0)`;
+        item.style.pointerEvents = opacity < HIDDEN_OPACITY ? 'none' : '';
       });
 
       const duration = video.duration;
@@ -81,5 +109,5 @@ export default function useHeroVideoScrub({ sectionRef, videoRef, chapterRefs, p
       window.removeEventListener('scroll', requestRender);
       window.removeEventListener('resize', requestRender);
     };
-  }, [sectionRef, videoRef, chapterRefs, progressRef]);
+  }, [sectionRef, videoRef, chapterRefs, progressRef, logoRef]);
 }
