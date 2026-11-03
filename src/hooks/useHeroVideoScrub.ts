@@ -78,7 +78,7 @@ export default function useHeroVideoScrub({
       if (logo) logo.style.opacity = String(1 - ramp(progress, LOGO_FADE[0], LOGO_FADE[1]));
       revealItems.forEach((item) => {
         const index = Number(item.dataset.reveal) || 0;
-        const start = REVEAL_STARTS[Math.min(index, REVEAL_STARTS.length - 1)];
+        const start = REVEAL_STARTS[Math.min(index, REVEAL_STARTS.length - 1)] ?? 0;
         const opacity = logo ? ramp(progress, start, start + REVEAL_LENGTH) : 1;
         item.style.opacity = String(opacity);
         item.style.transform = `translate3d(0, ${(1 - opacity) * REVEAL_SHIFT_PX}px, 0)`;
