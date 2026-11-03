@@ -37,7 +37,19 @@ function Reveal({ children, delay = 0, className = '' }: { children: React.React
   );
 }
 
-function Photo({ src, alt, ratio, eager }: { src: string; alt: string; ratio: string; eager?: boolean }) {
+function Photo({
+  src,
+  alt,
+  ratio,
+  position = '50% 50%',
+  eager,
+}: {
+  src: string;
+  alt: string;
+  ratio: string;
+  position?: string;
+  eager?: boolean;
+}) {
   return (
     <div className={`group overflow-hidden bg-stone-200 ${ratio}`}>
       <img
@@ -47,6 +59,7 @@ function Photo({ src, alt, ratio, eager }: { src: string; alt: string; ratio: st
         height={937}
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
+        style={{ objectPosition: position }}
         className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.015] motion-reduce:transition-none"
       />
     </div>
@@ -56,7 +69,7 @@ function Photo({ src, alt, ratio, eager }: { src: string; alt: string; ratio: st
 function Caption({ label, title, text }: { label: string; title: string; text: string }) {
   return (
     <div className="border-t border-stone-300 pt-5">
-      <p className="eyebrow text-stone-600">{label}</p>
+      <p className="text-xs font-medium uppercase tracking-[0.2em] text-stone-600">{label}</p>
       <h3 className="mt-4 text-[clamp(22px,2.2vw,30px)] font-medium leading-[1.2] tracking-[-0.01em]">{title}</h3>
       <p className="mt-3 text-base leading-[1.5] text-stone-700">{text}</p>
     </div>
@@ -94,18 +107,28 @@ export default function ScenariosSection() {
           </Reveal>
         </div>
 
-        {/* 02 + 03 — asymmetric pair */}
-        <div className="mt-20 grid gap-16 md:grid-cols-12 md:gap-x-8 lg:mt-32 lg:gap-x-12">
-          <Reveal className="flex flex-col gap-6 md:col-span-7">
-            <Photo src={lecture.url} alt="Лекция и презентация в пространстве АРКА 123" ratio="aspect-[3/2]" />
+        {/* 02 + 03 — asymmetric pair (≈56 / 44) */}
+        <div className="mt-20 grid gap-16 md:grid-cols-[14fr_11fr] md:gap-x-8 lg:mt-32 lg:gap-x-12">
+          <Reveal className="flex min-w-0 flex-col gap-6">
+            <Photo
+              src={lecture.url}
+              alt="Лекция и презентация в пространстве АРКА 123"
+              ratio="aspect-[3/2]"
+              position="56% 50%"
+            />
             <Caption label="02 / Обучение" title="Пространство для знаний" text="Лекции, презентации и экспертные встречи." />
           </Reveal>
-          <Reveal delay={120} className="flex flex-col gap-6 md:col-span-5 md:mt-40">
-            <Photo src={quiz.url} alt="Командное мероприятие в пространстве АРКА 123" ratio="aspect-[4/3]" />
+          <Reveal delay={120} className="flex min-w-0 flex-col gap-6 md:mt-40">
+            <Photo
+              src={quiz.url}
+              alt="Участники командного события за круглыми столами в пространстве АРКА 123"
+              ratio="aspect-[16/10]"
+              position="50% 50%"
+            />
             <Caption
               label="03 / Командные события"
               title="Пространство для команды"
-              text="Квизы, командные игры и корпоративные события."
+              text="Корпоративные встречи, командные игры и совместные события."
             />
           </Reveal>
         </div>
