@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, type CSSProperties } from 'react';
 import BrandLogo from '@/components/BrandLogo';
 import { ArrowRight } from 'lucide-react';
 import { BOOKING_HREF } from '@/data/content';
@@ -17,7 +17,7 @@ const CTA_CLASS =
 const REVEAL_HIDDEN = { opacity: 0, transform: 'translate3d(0, 12px, 0)' } as const;
 const REVEAL_SHOWN = { opacity: 1, transform: 'none' } as const;
 
-function CtaLink({ children, reveal }: { children: string; reveal?: { index: number; style: React.CSSProperties } }) {
+function CtaLink({ children, reveal }: { children: string; reveal?: { index: number; style: CSSProperties } }) {
   return (
     <a href={BOOKING_HREF} className={CTA_CLASS} data-reveal={reveal?.index} style={reveal?.style}>
       {children}
