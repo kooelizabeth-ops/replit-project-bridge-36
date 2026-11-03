@@ -1,5 +1,5 @@
 import { useRef, type CSSProperties } from 'react';
-import BrandLogo from '@/components/BrandLogo';
+import heroLogo from '@/assets/logo-white.png.asset.json';
 import { ArrowRight } from 'lucide-react';
 import { BOOKING_HREF } from '@/data/content';
 import { HERO_VIDEO_SRC } from '@/data/photos';
@@ -77,7 +77,7 @@ export default function HeroSection() {
             aria-hidden
             className="pointer-events-none absolute inset-0 flex items-center justify-center will-change-[opacity]"
           >
-            <BrandLogo width={440} className="!w-[70vw] md:!w-[380px] lg:!w-[440px]" />
+            <img src={heroLogo.url} alt="" width={600} height={200} decoding="async" className="h-auto w-[70vw] max-w-none md:w-[380px] lg:w-[440px]" />
           </div>
         )}
         <noscript>
