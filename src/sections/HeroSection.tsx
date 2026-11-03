@@ -5,8 +5,8 @@ import { HERO_VIDEO_SRC } from '@/data/photos';
 import useHeroVideoScrub from '@/hooks/useHeroVideoScrub';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 
-const CHAPTER_HEADLINE = 'text-[clamp(38px,5.6vw,76px)] font-medium leading-[1.2] tracking-[-0.02em] text-stone-50';
-const CHAPTER_SUPPORT = 'mt-6 text-lg leading-[1.5] text-stone-200 lg:text-xl';
+const CHAPTER_HEADLINE = 'text-[clamp(36px,5.6vw,76px)] font-medium leading-[1.05] tracking-[-0.02em] text-on-media';
+const CHAPTER_SUPPORT = 'mt-7 text-lg leading-[1.5] text-on-media/85 lg:text-xl';
 const CHAPTER_CHANNEL = 'col-start-1 row-start-1 will-change-[opacity,transform]';
 
 const CTA_CLASS =
@@ -57,16 +57,19 @@ export default function HeroSection() {
           tabIndex={-1}
           className="absolute inset-0 h-full w-full object-cover"
         />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-scrim/15" />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-ink-900/10 to-transparent"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900/80 via-ink-900/10 to-transparent"
         />
 
         <div className="relative flex h-full items-end">
           <div className="mx-auto grid w-full max-w-[1440px] px-6 pb-14 pt-32 lg:px-12 lg:pb-24">
-            <div ref={openingRef} className={`${CHAPTER_CHANNEL} max-w-[640px]`}>
-              <p className="eyebrow text-stone-300">АРКА 123 · MINSK · 123 M²</p>
-              <h1 className={`mt-6 ${CHAPTER_HEADLINE}`}>Пространство для встреч, которые имеют значение.</h1>
+            <div ref={openingRef} className={`${CHAPTER_CHANNEL} max-w-[880px]`}>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-on-media/75">АРКА 123 · MINSK · 123 M²</p>
+              <h1 className={`mt-6 text-balance ${CHAPTER_HEADLINE}`}>
+                АРКА 123 — пространство для встреч, которые имеют значение.
+              </h1>
               <p className={CHAPTER_SUPPORT}>Встречаемся напротив Библиотеки.</p>
               <CtaLink>Забронировать пространство</CtaLink>
             </div>
