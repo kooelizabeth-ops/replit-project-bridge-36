@@ -6,7 +6,7 @@ export default function ArchitectureSection() {
     <section id="architecture" aria-labelledby="architecture-title" className="bg-ink-900 py-28 text-stone-100 lg:py-40">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
         <div className="max-w-[720px]">
-          <p className="eyebrow text-stone-400">Архитектура</p>
+          <p className="eyebrow text-stone-400">02 / Архитектура</p>
           <h2 id="architecture-title" className="mt-6 text-[clamp(30px,3.6vw,48px)] font-medium leading-[1.2] tracking-[-0.015em]">
             Архитектура задаёт настроение.
           </h2>

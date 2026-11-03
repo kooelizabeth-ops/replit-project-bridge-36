@@ -82,7 +82,7 @@ export default function ScenariosSection() {
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
         <Reveal className="grid gap-8 lg:grid-cols-12 lg:gap-x-12">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-brand">АРКА 123 / Пространство</p>
+            <p className="eyebrow text-brand">04 / Сценарии</p>
             <h2
               id="scenarios-title"
               className="mt-6 text-[clamp(32px,4.6vw,64px)] font-medium uppercase leading-[1.05] tracking-[-0.02em]"

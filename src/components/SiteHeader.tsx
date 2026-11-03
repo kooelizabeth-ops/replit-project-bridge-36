@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 import BrandLogo from '@/components/BrandLogo';
 import { BOOKING_HREF, NAV_ITEMS } from '@/data/content';
+import { HEADER_LOGO_VAR } from '@/hooks/useHeroVideoScrub';
 import useScrolled from '@/hooks/useScrolled';
 
 export default function SiteHeader() {
@@ -35,8 +36,11 @@ export default function SiteHeader() {
     >
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-4 px-6 lg:h-24 lg:px-12">
         <a href="#top" onClick={closeMenu} aria-label="АРКА 123, в начало страницы" className="logo-hover shrink-0">
-          <BrandLogo width={146} className="lg:hidden" />
-          <BrandLogo width={220} className="hidden lg:block" />
+          {/* Hidden while the hero's centred logo is on screen; the hero scroll loop drives the variable. */}
+          <span className="block" style={{ opacity: menuOpen ? 1 : `var(${HEADER_LOGO_VAR}, 1)` }}>
+            <BrandLogo width={146} className="lg:hidden" />
+            <BrandLogo width={220} className="hidden lg:block" />
+          </span>
         </a>
 
         <nav aria-label="Основная навигация" className="hidden items-center gap-6 xl:gap-10 lg:flex">

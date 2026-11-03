@@ -8,7 +8,7 @@ export default function BookingSection() {
     <section id="booking" aria-labelledby="booking-title" className="bg-stone-100 py-28 text-ink-900 lg:py-40">
       <div className="mx-auto grid max-w-[1440px] gap-20 px-6 lg:grid-cols-12 lg:gap-x-12 lg:px-12">
         <div className="flex flex-col lg:col-span-5">
-          <p className="eyebrow text-stone-600">Бронирование</p>
+          <p className="eyebrow text-stone-600">05 / Бронирование</p>
           <h2 id="booking-title" className="mt-6 text-[clamp(30px,3.6vw,48px)] font-medium leading-[1.2] tracking-[-0.015em]">
             Создадим событие вместе.
           </h2>
