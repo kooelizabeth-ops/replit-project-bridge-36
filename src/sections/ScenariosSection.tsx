@@ -108,7 +108,7 @@ export default function ScenariosSection() {
         </div>
 
         {/* 02 + 03 — asymmetric pair (≈56 / 44) */}
-        <div className="mt-20 grid gap-16 md:grid-cols-[14fr_11fr] md:gap-x-8 lg:mt-32 lg:gap-x-12">
+        <div className="mt-20 grid gap-16 lg:mt-32 lg:grid-cols-[14fr_11fr] lg:gap-x-12">
           <Reveal className="flex min-w-0 flex-col gap-6">
             <Photo
               src={lecture.url}
@@ -118,7 +118,7 @@ export default function ScenariosSection() {
             />
             <Caption label="02 / Обучение" title="Пространство для знаний" text="Лекции, презентации и экспертные встречи." />
           </Reveal>
-          <Reveal delay={120} className="flex min-w-0 flex-col gap-6 md:mt-40">
+          <Reveal delay={120} className="flex min-w-0 flex-col gap-6 lg:mt-40">
             <Photo
               src={quiz.url}
               alt="Участники командного события за круглыми столами в пространстве АРКА 123"
