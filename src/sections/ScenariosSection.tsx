@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import floristry from '@/assets/scenario-floristry.webp.asset.json';
-import lecture from '@/assets/scenario-lecture.webp.asset.json';
-import quiz from '@/assets/scenario-quiz.webp.asset.json';
+import floristry from '@/assets/scenario-floristry.webp';
+import lecture from '@/assets/scenario-lecture.webp';
+import quiz from '@/assets/scenario-quiz.webp';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 
 function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -100,7 +100,7 @@ export default function ScenariosSection() {
         {/* 01 — main frame */}
         <div className="mt-16 grid gap-8 lg:mt-24 lg:grid-cols-12 lg:gap-x-12">
           <Reveal className="lg:col-span-9">
-            <Photo src={floristry.url} alt="Флористический мастер-класс в пространстве АРКА 123" ratio="aspect-[16/9]" />
+            <Photo src={floristry} alt="Флористический мастер-класс в пространстве АРКА 123" ratio="aspect-[16/9]" />
           </Reveal>
           <Reveal delay={120} className="lg:col-span-3 lg:self-end">
             <Caption label="01 / Творческие встречи" title="Пространство для идей" text="Творческие встречи и мастер-классы." />
@@ -111,7 +111,7 @@ export default function ScenariosSection() {
         <div className="mt-20 grid gap-16 lg:mt-32 lg:grid-cols-[14fr_11fr] lg:gap-x-12">
           <Reveal className="flex min-w-0 flex-col gap-6">
             <Photo
-              src={lecture.url}
+              src={lecture}
               alt="Лекция и презентация в пространстве АРКА 123"
               ratio="aspect-[3/2]"
               position="56% 50%"
@@ -120,7 +120,7 @@ export default function ScenariosSection() {
           </Reveal>
           <Reveal delay={120} className="flex min-w-0 flex-col gap-6 lg:mt-40">
             <Photo
-              src={quiz.url}
+              src={quiz}
               alt="Участники командного события за круглыми столами в пространстве АРКА 123"
               ratio="aspect-[16/10]"
               position="50% 50%"

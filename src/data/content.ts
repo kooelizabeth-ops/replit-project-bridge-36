@@ -1,11 +1,11 @@
-import logo from '@/assets/images-4.png.asset.json';
+import logo from '@/assets/images-4.png';
 
 export const SITE = {
   name: 'АРКА 123',
   brandLine: 'Встречаемся напротив Библиотеки.',
   address: 'Мстиславца, 10, Минск',
   area: '123 м²',
-  logoSrc: logo.url,
+  logoSrc: logo,
 } as const;
 
 export const NAV_ITEMS = [
