@@ -15,3 +15,4 @@
 - Venue photos, logo and video are Lovable Assets pointers in `src/assets/*.asset.json`, referenced from `src/data/photos.ts` and `src/data/content.ts`.
 - Booking enquiries are inserted from the browser into `public.enquiries`; RLS allows insert only, nobody can read them from the site — keep it write-only.
 - Hero motion (chapters, brand-reveal logo, SCROLL cue, header-logo handover via a CSS variable, video scrub) is driven by the single rAF loop in `src/hooks/useHeroVideoScrub.ts`; add hero effects there instead of new scroll listeners so timing stays in one place.
+- The АРКА 123 logo for preloader and hero is one inline SVG (`src/components/BrandMark.tsx`, paths in `src/data/preloaderLogo.ts`), coloured via `fill-*`; both screens share the same size/offset classes so the preloader fade has no logo jump.
