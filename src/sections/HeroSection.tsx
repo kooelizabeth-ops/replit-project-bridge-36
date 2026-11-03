@@ -35,6 +35,7 @@ export default function HeroSection() {
   const characterRef = useRef<HTMLDivElement>(null);
   const invitationRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
+  const cueRef = useRef<HTMLDivElement>(null);
   const revealStyle = reduceMotion ? REVEAL_SHOWN : REVEAL_HIDDEN;
 
   useHeroVideoScrub({
@@ -43,6 +44,7 @@ export default function HeroSection() {
     progressRef,
     chapterRefs: [openingRef, characterRef, invitationRef],
     logoRef,
+    cueRef,
   });
 
   return (
@@ -70,6 +72,11 @@ export default function HeroSection() {
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900/80 via-ink-900/10 to-transparent"
         />
+        {/* Soft shade under the navigation only, so white links stay legible on bright frames. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-[170px] bg-gradient-to-b from-scrim/35 via-scrim/18 via-55% to-transparent"
+        />
 
         {!reduceMotion && (
           <div
@@ -77,7 +84,7 @@ export default function HeroSection() {
             aria-hidden
             className="pointer-events-none absolute inset-0 flex items-center justify-center will-change-[opacity]"
           >
-            <img src={heroLogo.url} alt="" width={600} height={200} decoding="async" className="h-auto w-[70vw] max-w-none md:w-[380px] lg:w-[440px]" />
+            <img src={heroLogo.url} alt="" width={600} height={200} decoding="async" className="h-auto w-[70vw] max-w-none -translate-y-[2.5svh] md:w-[380px] lg:w-[440px]" />
           </div>
         )}
         <noscript>
@@ -87,7 +94,7 @@ export default function HeroSection() {
         <div className="relative flex h-full items-end">
           <div className="mx-auto grid w-full max-w-[1440px] px-6 pb-14 pt-32 lg:px-12 lg:pb-24">
             <div ref={openingRef} className={`${CHAPTER_CHANNEL} max-w-[880px]`}>
-              <p data-reveal={0} style={revealStyle} className="text-xs font-medium uppercase tracking-[0.18em] text-on-media/75">
+              <p data-reveal={0} style={revealStyle} className="eyebrow text-on-media/75">
                 АРКА 123 · MINSK · 123 М²
               </p>
               <h1 data-reveal={1} style={revealStyle} className={`mt-6 text-balance ${CHAPTER_HEADLINE}`}>
@@ -115,6 +122,21 @@ export default function HeroSection() {
             )}
           </div>
         </div>
+
+        {!reduceMotion && (
+          <div
+            ref={cueRef}
+            aria-hidden
+            className="pointer-events-none absolute bottom-7 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2.5 will-change-[opacity]"
+          >
+            <span className="pl-[0.25em] text-[9px] font-normal uppercase leading-none tracking-[0.25em] text-on-media/75 md:text-[10px]">
+              Scroll
+            </span>
+            <span className="block h-[30px] w-px overflow-hidden bg-on-media/20 md:h-[34px]">
+              <span className="scroll-cue-line block h-full w-full bg-on-media/75" />
+            </span>
+          </div>
+        )}
 
         {!reduceMotion && (
           <div aria-hidden className="absolute inset-x-0 bottom-0 h-px bg-stone-100/20">

@@ -9,7 +9,7 @@ export default function AboutSection() {
         <VenuePhoto photo={ABOUT_PHOTO} sizes="(min-width: 1024px) 58vw, 100vw" className="lg:col-span-7" />
 
         <div className="flex flex-col justify-center lg:col-span-4 lg:col-start-9">
-          <p className="eyebrow text-stone-600">Пространство</p>
+          <p className="eyebrow text-stone-600">01 / Пространство</p>
           <h2 id="about-title" className="mt-6 text-[clamp(30px,3.6vw,48px)] font-medium leading-[1.2] tracking-[-0.015em]">
             Пространство, в котором встречаются идеи.
           </h2>

@@ -13,7 +13,12 @@ interface HeroVideoScrubRefs {
   progressRef: RefObject<HTMLDivElement | null>;
   /** Centred brand logo shown before the opening text (brand reveal). */
   logoRef?: RefObject<HTMLElement | null>;
+  /** "SCROLL" cue shown together with the centred logo. */
+  cueRef?: RefObject<HTMLElement | null>;
 }
+
+/** CSS variable read by the header logo so it hands over from the centred logo. */
+export const HEADER_LOGO_VAR = '--header-logo-opacity';
 
 const SEEK_TOLERANCE_SECONDS = 0.03;
 const CHAPTER_BOUNDARIES = [1 / 3, 2 / 3] as const;
@@ -46,6 +51,7 @@ export default function useHeroVideoScrub({
   chapterRefs,
   progressRef,
   logoRef,
+  cueRef,
 }: HeroVideoScrubRefs) {
   useEffect(() => {
     const section = sectionRef.current;
@@ -75,7 +81,15 @@ export default function useHeroVideoScrub({
       // Brand reveal: only while the centred logo is rendered (not with reduced motion).
       const logo = logoRef?.current ?? null;
       const revealItems = chapters[0]?.querySelectorAll<HTMLElement>('[data-reveal]') ?? [];
-      if (logo) logo.style.opacity = String(1 - ramp(progress, LOGO_FADE[0], LOGO_FADE[1]));
+      const logoOut = logo ? ramp(progress, LOGO_FADE[0], LOGO_FADE[1]) : 1;
+      if (logo) logo.style.opacity = String(1 - logoOut);
+      const cue = cueRef?.current ?? null;
+      if (cue) {
+        cue.style.opacity = String(1 - logoOut);
+        cue.style.visibility = logoOut > 1 - HIDDEN_OPACITY ? 'hidden' : 'visible';
+      }
+      // Header logo appears exactly as the centred one disappears.
+      document.documentElement.style.setProperty(HEADER_LOGO_VAR, String(logoOut));
       revealItems.forEach((item) => {
         const index = Number(item.dataset['reveal']) || 0;
         const start = REVEAL_STARTS[Math.min(index, REVEAL_STARTS.length - 1)] ?? 0;
@@ -108,6 +122,7 @@ export default function useHeroVideoScrub({
       video.removeEventListener('loadedmetadata', requestRender);
       window.removeEventListener('scroll', requestRender);
       window.removeEventListener('resize', requestRender);
+      document.documentElement.style.removeProperty(HEADER_LOGO_VAR);
     };
-  }, [sectionRef, videoRef, chapterRefs, progressRef, logoRef]);
+  }, [sectionRef, videoRef, chapterRefs, progressRef, logoRef, cueRef]);
 }
