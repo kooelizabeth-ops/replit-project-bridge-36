@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import BrandLogo from '@/components/BrandLogo';
 import { ArrowRight } from 'lucide-react';
 import { BOOKING_HREF } from '@/data/content';
 import { HERO_VIDEO_SRC } from '@/data/photos';
@@ -12,9 +13,13 @@ const CHAPTER_CHANNEL = 'col-start-1 row-start-1 will-change-[opacity,transform]
 const CTA_CLASS =
   'group mt-10 inline-flex h-12 items-center gap-3 bg-stone-100 px-6 text-sm font-medium text-ink-900 transition-colors duration-200 hover:bg-stone-200 active:bg-stone-300';
 
-function CtaLink({ children }: { children: string }) {
+// Opening items start hidden for the brand reveal; the scroll hook fades them in.
+const REVEAL_HIDDEN = { opacity: 0, transform: 'translate3d(0, 12px, 0)' } as const;
+const REVEAL_SHOWN = { opacity: 1, transform: 'none' } as const;
+
+function CtaLink({ children, reveal }: { children: string; reveal?: { index: number; style: React.CSSProperties } }) {
   return (
-    <a href={BOOKING_HREF} className={CTA_CLASS}>
+    <a href={BOOKING_HREF} className={CTA_CLASS} data-reveal={reveal?.index} style={reveal?.style}>
       {children}
       <ArrowRight size={18} strokeWidth={1.5} aria-hidden className="transition-transform duration-200 group-hover:translate-x-1" />
     </a>
@@ -29,12 +34,15 @@ export default function HeroSection() {
   const openingRef = useRef<HTMLDivElement>(null);
   const characterRef = useRef<HTMLDivElement>(null);
   const invitationRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const revealStyle = reduceMotion ? REVEAL_SHOWN : REVEAL_HIDDEN;
 
   useHeroVideoScrub({
     sectionRef,
     videoRef,
     progressRef,
     chapterRefs: [openingRef, characterRef, invitationRef],
+    logoRef,
   });
 
   return (
@@ -63,15 +71,32 @@ export default function HeroSection() {
           className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-900/80 via-ink-900/10 to-transparent"
         />
 
+        {!reduceMotion && (
+          <div
+            ref={logoRef}
+            aria-hidden
+            className="pointer-events-none absolute inset-0 flex items-center justify-center will-change-[opacity]"
+          >
+            <BrandLogo width={440} className="!w-[70vw] md:!w-[380px] lg:!w-[440px]" />
+          </div>
+        )}
+        <noscript>
+          <style>{'[data-reveal]{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
+
         <div className="relative flex h-full items-end">
           <div className="mx-auto grid w-full max-w-[1440px] px-6 pb-14 pt-32 lg:px-12 lg:pb-24">
             <div ref={openingRef} className={`${CHAPTER_CHANNEL} max-w-[880px]`}>
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-on-media/75">АРКА 123 · MINSK · 123 M²</p>
-              <h1 className={`mt-6 text-balance ${CHAPTER_HEADLINE}`}>
+              <p data-reveal={0} style={revealStyle} className="text-xs font-medium uppercase tracking-[0.18em] text-on-media/75">
+                АРКА 123 · MINSK · 123 М²
+              </p>
+              <h1 data-reveal={1} style={revealStyle} className={`mt-6 text-balance ${CHAPTER_HEADLINE}`}>
                 АРКА 123 — пространство для встреч, которые имеют значение.
               </h1>
-              <p className={CHAPTER_SUPPORT}>Встречаемся напротив Библиотеки.</p>
-              <CtaLink>Забронировать пространство</CtaLink>
+              <p data-reveal={2} style={revealStyle} className={CHAPTER_SUPPORT}>
+                Встречаемся напротив Библиотеки.
+              </p>
+              <CtaLink reveal={{ index: 3, style: revealStyle }}>Забронировать пространство</CtaLink>
             </div>
 
             {!reduceMotion && (
