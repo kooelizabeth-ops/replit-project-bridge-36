@@ -14,3 +14,4 @@
 - Brand palette (ink/slate/stone/signal/moss) is registered as Tailwind colors in `src/styles.css` `@theme`; components use those classes, so add new colors there, not inline.
 - Venue photos, logo and video are Lovable Assets pointers in `src/assets/*.asset.json`, referenced from `src/data/photos.ts` and `src/data/content.ts`.
 - Booking enquiries are inserted from the browser into `public.enquiries`; RLS allows insert only, nobody can read them from the site — keep it write-only.
+- Hero motion (chapters, brand-reveal logo, video scrub) is driven by the single rAF loop in `src/hooks/useHeroVideoScrub.ts`; add hero effects there instead of new scroll listeners so timing stays in one place.
