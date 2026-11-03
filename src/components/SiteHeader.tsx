@@ -35,8 +35,8 @@ export default function SiteHeader() {
     >
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between gap-4 px-6 lg:h-24 lg:px-12">
         <a href="#top" onClick={closeMenu} aria-label="АРКА 123, в начало страницы" className="logo-hover shrink-0">
-          <BrandLogo width={132} className="lg:hidden" />
-          <BrandLogo width={200} className="hidden lg:block" />
+          <BrandLogo width={146} className="lg:hidden" />
+          <BrandLogo width={220} className="hidden lg:block" />
         </a>
 
         <nav aria-label="Основная навигация" className="hidden items-center gap-6 xl:gap-10 lg:flex">
@@ -44,7 +44,7 @@ export default function SiteHeader() {
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium nav-link text-stone-200 transition-colors duration-200 hover:text-stone-100"
+              className="text-sm font-medium nav-link text-on-media transition-opacity duration-200 hover:opacity-80"
             >
               {item.label}
             </a>

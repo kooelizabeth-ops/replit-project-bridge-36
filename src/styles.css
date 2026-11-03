@@ -11,8 +11,12 @@
  */
 
 @theme inline {
-  --font-sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Onest", system-ui, "Segoe UI", Roboto, sans-serif;
   --tracking-eyebrow: 0.24em;
+
+  /* Pure white for type/logo over the hero video, black for its scrim. */
+  --color-on-media: #ffffff;
+  --color-scrim: #000000;
 
   --color-ink-950: oklch(0.174 0.008 229.4);
   --color-ink-900: #202426;
