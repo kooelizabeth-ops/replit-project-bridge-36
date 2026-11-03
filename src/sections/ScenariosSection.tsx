@@ -56,7 +56,7 @@ function Photo({ src, alt, ratio, eager }: { src: string; alt: string; ratio: st
 function Caption({ label, title, text }: { label: string; title: string; text: string }) {
   return (
     <div className="border-t border-stone-300 pt-5">
-      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-stone-600">{label}</p>
+      <p className="eyebrow text-stone-600">{label}</p>
       <h3 className="mt-4 text-[clamp(22px,2.2vw,30px)] font-medium leading-[1.2] tracking-[-0.01em]">{title}</h3>
       <p className="mt-3 text-base leading-[1.5] text-stone-700">{text}</p>
     </div>
@@ -69,7 +69,7 @@ export default function ScenariosSection() {
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
         <Reveal className="grid gap-8 lg:grid-cols-12 lg:gap-x-12">
           <div className="lg:col-span-7">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand">АРКА 123 / Пространство</p>
+            <p className="eyebrow text-brand">АРКА 123 / Пространство</p>
             <h2
               id="scenarios-title"
               className="mt-6 text-[clamp(32px,4.6vw,64px)] font-medium uppercase leading-[1.05] tracking-[-0.02em]"
@@ -115,7 +115,7 @@ export default function ScenariosSection() {
             АРКА 123 — 123 м² для событий, у которых есть свой характер.
           </p>
           <div className="text-sm leading-[1.6] text-stone-600 lg:col-span-4 lg:col-start-9">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em]">Мстиславца, 10 · Минск</p>
+            <p className="eyebrow">Мстиславца, 10 · Минск</p>
             <p className="mt-2">Встречаемся напротив Библиотеки.</p>
           </div>
         </Reveal>
